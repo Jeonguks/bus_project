@@ -2,15 +2,17 @@ import StopsList from "../components/StopsList";
 
 import Header from "../components/Header";
 import SimpleInfo from "../components/SimpleInfo";
+import { formatAPITime } from "../utils/formatAPITime";
 
 const Home = () => {
-  const nowTime = new Date().toLocaleTimeString();
+  const nowTime = new Date()
+  const formattedAPITIME = formatAPITime(nowTime)
   return (
     <>
       <Header/>
-      <SimpleInfo/>
+      <SimpleInfo nowTime={formattedAPITIME}/>
       <div>
-        {`검색시간: ${nowTime}`}
+        {`검색시간: ${nowTime.toLocaleTimeString()}`}
         <button onClick={() => location.reload()}>새로고침</button>
       </div>
       <button

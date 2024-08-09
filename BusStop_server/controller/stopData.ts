@@ -9,6 +9,7 @@ const lineid = "5291010000";
 async function fetchData() {
 
   try {
+    let activatedBusData: string[] = []
     let busData = []
     const response = await axios.get(
       url + "?serviceKey=" + process.env.BUSAPI_KEY + "&lineid=" + lineid,
@@ -17,12 +18,29 @@ async function fetchData() {
     const result = response.data;
     const parsedData = await parseStringPromise(result); // parse xml to Object
     const trimedData = parsedData.response.body[0].items[0].item;
-    const jsonData = JSON.stringify(trimedData) // parse Object to JSON
+    //const jsonData = JSON.stringify(trimedData) // parse Object to JSON
     
     const stopsWithGpsym = trimedData.filter((stop: { gpsym: any; }) => stop.gpsym);
 
-    console.log(stopsWithGpsym)
-    return jsonData
+    //console.log(stopsWithGpsym.length) //현재 운행중인 버스 수 
+   
+    stopsWithGpsym.forEach((item: { gpsym: any[]; }) => {
+      activatedBusData.push(item.gpsym[0])
+    })
+    //console.log(activatedBusData) //gps에 연결된 버스의 gps 마지막 연결시간 hhmmss
+
+    //
+    //console.log(stopsWithGpsym) //현재 운행중인 버스의 전체 정보 
+    
+    const activeBusDataJson = {
+      activatedBusCtn : activatedBusData.length,
+      activatedBusTime : activatedBusData
+    }
+
+    console.log(activeBusDataJson)
+
+    return activeBusDataJson
+    //return jsonData
     //console.log(trimedData);
     // for (let i =0;i<jsonData.length;i++){
     //   let newData = {

@@ -17,20 +17,33 @@ app.use(cors());
 // //     setInterval(addBusData,60000);
 // //     res.json(200)
 // // })
-
-app.get("/test", async (req, res) => {
-  try {
-    const data = await fetchData();
-    if (!data) {
-      res.json(500);
-    } else {
-      res.json(JSON.parse(data));
+app.get("/getActiveBus", async (req,res)=>{
+  try{
+    const activeBusData = await fetchData();
+    if(!activeBusData){
+      res.json(500)
+    }else{
+      res.json(JSON.stringify(activeBusData))
     }
-  } catch (error) {
-    console.error(error);
-    res.json(500).send("server Error!");
+  }catch(error){
+    console.error(error)
+    res.json(500).send("Server Error!")
   }
-});
+})
+
+// app.get("/test", async (req, res) => {
+//   try {
+//     const data = await fetchData();
+//     if (!data) {
+//       res.json(500);
+//     } else {
+//       res.json(JSON.parse(data));
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.json(500).send("server Error!");
+//   }
+// });
 app.use(express.static(path.join(__dirname, "../dist/")));
 
 app.get("/", (req: Request, res: Response) => {

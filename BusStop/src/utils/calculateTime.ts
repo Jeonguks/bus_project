@@ -1,8 +1,8 @@
 const parseTimeToDate = (time: string) => {
     //hhmmss format time to Date Object
   const hours = parseInt(time.substring(0, 2), 10);
-  const minutes = parseInt(time.substring(3, 4), 10);
-  const seconds = parseInt(time.substring(5, 6), 10);
+  const minutes = parseInt(time.substring(2, 4), 10);
+  const seconds = parseInt(time.substring(4, 6), 10);
 
   return new Date(1970, 0, 1, hours, minutes, seconds);
 };

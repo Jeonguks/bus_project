@@ -1,12 +1,21 @@
-import "../App.css"
+import "../App.css";
 import Stops from "./Stops";
-import { dataSet } from "../data/busStopLists"; 
+import { dataSet } from "../data/busStopLists";
 
-const StopsList = () => {
+const StopsList = (props: { whereBus: string[] }) => {
+
   return (
     <div className="stopsList-wrapper">
-      {dataSet.map((e, i) => {
-        return <Stops key={i} stopIdx={String(i)} stopName={e.bstopnm} />;
+      {dataSet.map((value, index) => {
+        const isStop = props.whereBus.includes(value.bstopnm);
+        return (
+          <Stops
+            key={index}
+            stopIdx={String(index)}
+            stopName={value.bstopnm}
+            isStop={isStop}
+          />
+        );
       })}
     </div>
   );

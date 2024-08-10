@@ -3,8 +3,6 @@ import { calculateTime } from "../utils/calculateTime";
 import { formatTime } from "../utils/FormatTime";
 //import Test from "./Test";
 
-
-
 const SimpleInfo = (props: { nowTime: string }) => {
   const [activeBusCtn, setActiveBusCtn] = useState(0);
   const [activeBusTimes, setActiveBusTimes] = useState([]);
@@ -34,14 +32,13 @@ const SimpleInfo = (props: { nowTime: string }) => {
     <div className="simpleInfo-wrapper">
       {activeBusCtn === 0 ? (
         <>
-        <span>현재 운행중인 버스가 없습니다.</span>
-        <div>운행정보 ? </div>
-        
+          <span>현재 운행중인 버스가 없습니다.</span>
         </>
       ) : (
         <>
-        <span>{`지금 ${activeBusCtn} 대의 버스가 운행중입니다.`}</span><br/>
-        <span>{`실시간 버스위치 : ${activeBusWhere[0]} `}</span>
+          <span>{`지금 ${activeBusCtn} 대의 버스가 운행중입니다.`}</span>
+          <br />
+          <span>{`실시간 버스위치 : ${activeBusWhere[0]} `}</span>
         </>
       )}
       {activeBusCtn !== 0 &&

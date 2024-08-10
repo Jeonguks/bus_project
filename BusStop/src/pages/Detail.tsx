@@ -13,15 +13,24 @@ const Detail = () => {
     <>
       <Header />
       <BackBtn />
-      <h3>{dataSet[stopIdx].bstopnm}</h3>
-      <h4>{dataSet[stopIdx + 1].bstopnm + " 방향"}</h4>
-      <div className="detailInfo-wrapper">
-        <div>다음 도착예정 : {dataSet[stopIdx].avgym==200?"회차중입니다.":dataSet[stopIdx].avgym}</div>
-        <NextStop/>
-        <div>마지막 도착 : </div>
-        <LastStop/>
-        <div>5분내 도착확률 : </div>
-        <StopProb/>
+      <div className="detail-wrapper">
+        <div className="detail-title">
+          <h3>{dataSet[stopIdx].bstopnm}</h3>
+          <h4>{dataSet[stopIdx + 1].bstopnm + " 방향"}</h4>
+        </div>
+        <div className="detail-info">
+          <div>
+            다음 도착예정 :{" "}
+            {dataSet[stopIdx].avgym == 200
+              ? "회차중입니다."
+              : dataSet[stopIdx].avgym}
+          </div>
+          <NextStop />
+          <div>마지막 도착 : </div>
+          <LastStop />
+          <div>5분내 도착확률 : </div>
+          <StopProb />
+        </div>
       </div>
     </>
   );

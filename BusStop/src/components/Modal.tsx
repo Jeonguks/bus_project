@@ -1,17 +1,26 @@
-import "../App.css"
+import "../App.css";
 
-const Modal = ({isModalOpen,onClose,children})=>{
-  if(!isModalOpen){
+interface ModalProps {
+  isModalOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+const Modal: React.FC<ModalProps> = ({ isModalOpen, onClose, children }) => {
+  if (!isModalOpen) {
     return null;
   }
-  return(
+
+  return (
     <div className="modal-wrapper" onClick={onClose}>
-      <div className="modal-content" >
-        <button className="modal-button" onClick={onClose}>x</button>
+      <div className="modal-content">
+        <button className="modal-button" onClick={onClose}>
+          x
+        </button>
         {children}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Modal;

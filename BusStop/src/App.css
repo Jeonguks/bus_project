@@ -141,6 +141,11 @@ header {
   top:28px;
   left:25px;
 }
+
+.test-wrapper{
+  text-align: center;
+  margin: auto;
+}
 @keyframes refresh-animation {
   from{
     transform: rotate(0deg);

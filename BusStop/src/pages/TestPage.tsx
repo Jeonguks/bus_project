@@ -5,7 +5,7 @@ const TestPage = () => {
   const [activatedBusTimes, setActivatedBusTimes] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/getActiveBus", { method: "GET" })
+    fetch("https://sahabus.du.r.appspot.com/getActiveBus", { method: "GET" })
       .then((res) => res.json())
       .then((result) => {
         const data = JSON.parse(result);
@@ -36,12 +36,6 @@ const TestPage = () => {
         <span>
           보통 버스의 배차간격은 <br />
           <strong>10분,15분,20분,30분</strong> 중 하나입니다.
-        </span>
-        <br />
-        <br />
-        <span>
-          배차 간격을 고려해서 버스가 기숙사에서 언제 출발하는지 확인하면
-          될것같습니다.
         </span>
         <br />
         <br />

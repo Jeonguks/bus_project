@@ -11,6 +11,7 @@ const Home = () => {
   const nowTime = new Date()
   //const formattedAPITIME = formatAPITime(nowTime)
   const [activatedBusStopidx,setActivatedBusStopidx] = useState<string[]>([])
+  const [activatedBusTime,setActivatedBusTime] = useState<string[]>([])
   const [isModalOpen,setModalOpen] = useState(false)
   const nav = useNavigate();
   const handleModalOpen = ()=>{
@@ -20,12 +21,12 @@ const Home = () => {
     setModalOpen(false)
   }
   useEffect(() => {
-    fetch("http://localhost:8080/getActiveBus", { method: "GET" })
+    fetch("https://sahabus.du.r.appspot.com/getActiveBus", { method: "GET" })
       .then((res) => res.json())
       .then((res) => {
         const result = JSON.parse(res);
         // setActivatedBusCtn(result.activatedBusCtn);
-        // setActivatedBusTimes(result.activatedBusTime);
+        setActivatedBusTime(result.activatedBusTime);
         setActivatedBusStopidx(result.activatedBusStopidx);
       })
       .catch((error) => {
@@ -45,7 +46,7 @@ const Home = () => {
         <BusInfo/>
       </Modal>
       <div className="content-wrapper">
-        <StopsList whereBus={activatedBusStopidx} />
+        <StopsList whereBus={activatedBusStopidx} busTime={activatedBusTime} />
       </div>
     </>
   );

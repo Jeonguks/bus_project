@@ -12,9 +12,7 @@ const Stops = (props: {
 }) => {
   const navigate = useNavigate();
   const onClick = () => {
-    if(props.stopTime ==""){
-      console.log("aa")
-    }else{
+    if(props.stopTime !==""){
       alert(`이 버스는 ${formatTime(calculateTimeNow(props.stopTime))}째 여기에 있습니다.`);
     }
     // console.log(calculateTimeNow(props.stopTime));

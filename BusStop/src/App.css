@@ -4,6 +4,8 @@ header {
 
 .content-wrapper {
   border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 13px 4px rgb(188, 200, 203) inset;
   margin-top: 10px;
   width: 230px;
 }
@@ -145,6 +147,22 @@ header {
 .test-wrapper{
   text-align: center;
   margin: auto;
+}
+
+.stops-icon::before{
+  margin-block: 28px;
+  margin-left: 9px;
+  content: "";
+  position: absolute;
+  left: inherit;
+  width: 2px;
+  height: 40px;
+  background-color: rgb(122,192,235)
+}
+.tap-wrapper{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 @keyframes refresh-animation {
   from{

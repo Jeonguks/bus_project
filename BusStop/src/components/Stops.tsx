@@ -34,7 +34,7 @@ const Stops = (props: {
                 <RiBus2Line color="red" width={"20px"} height={"20px"} />
               )
             ) : (
-              <IoIosArrowDropdown color="#ccc" />
+              <IoIosArrowDropdown color="rgb(122,192,235)" />
             )}
           </div>
           <div className="stops-name">{props.stopName}</div>

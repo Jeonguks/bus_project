@@ -8,7 +8,6 @@ import Modal from "../components/Modal";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const nowTime = new Date()
   //const formattedAPITIME = formatAPITime(nowTime)
   const [activatedBusStopidx,setActivatedBusStopidx] = useState<string[]>([])
   const [activatedBusTime,setActivatedBusTime] = useState<string[]>([])
@@ -47,9 +46,6 @@ const Home = () => {
     <>
       <Header/>
       {/* <SimpleInfo nowTime={formattedAPITIME}/> */}
-      <div className="search-wrapper">
-        {`검색시간: ${nowTime.toLocaleTimeString()}`}
-      </div>
       <button onClick={handleModalOpen}>운행정보</button>
       <button onClick={()=>nav('/test')}>회차정보</button>
       <Modal isModalOpen={isModalOpen} onClose={handleModalClose}>

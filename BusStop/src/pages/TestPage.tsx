@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BackBtn from "../ui/BackBtn";
+import Header from "../components/Header";
 
 const TestPage = () => {
   const [activatedBusTimes, setActivatedBusTimes] = useState<string[]>([]);
@@ -20,6 +21,7 @@ const TestPage = () => {
 
   return lazyBusTime != Infinity ? (
     <>
+      <Header/>
       <BackBtn />
       <div className="test-wrapper">
         <h3>회차 대기중 버스 정보</h3>

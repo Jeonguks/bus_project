@@ -1,4 +1,4 @@
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RiBus2Line } from "react-icons/ri";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { calculateTimeNow } from "../utils/calculateTime";
@@ -10,19 +10,19 @@ const Stops = (props: {
   isStop: boolean;
   stopTime: string;
 }) => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const onClick = () => {
     if(props.stopTime ==""){
-      alert("test중입니다.")
+      console.log("aa")
     }else{
       alert(`이 버스는 ${formatTime(calculateTimeNow(props.stopTime))}째 여기에 있습니다.`);
     }
     // console.log(calculateTimeNow(props.stopTime));
-    // if (props.stopIdx == 14) {
-    //   navigate("detail/0");
-    // } else {
-    //   navigate(`detail/${props.stopIdx}`);
-    // }
+    if (props.stopIdx == 14) {
+      navigate("detail/0");
+    } else {
+      navigate(`detail/${props.stopIdx}`);
+    }
   };
   return (
     <>

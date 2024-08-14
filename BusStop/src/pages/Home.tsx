@@ -13,6 +13,7 @@ const Home = () => {
   const [activatedBusStopidx,setActivatedBusStopidx] = useState<string[]>([])
   const [activatedBusTime,setActivatedBusTime] = useState<string[]>([])
   const [isModalOpen,setModalOpen] = useState(false)
+  const [loading,setLoading] = useState(true)
   const nav = useNavigate();
   const handleModalOpen = ()=>{
     setModalOpen(true)
@@ -21,6 +22,7 @@ const Home = () => {
     setModalOpen(false)
   }
   useEffect(() => {
+    setLoading(true)
     fetch("https://sahabus.du.r.appspot.com/getActiveBus", { method: "GET" })
       .then((res) => res.json())
       .then((res) => {
@@ -28,11 +30,19 @@ const Home = () => {
         // setActivatedBusCtn(result.activatedBusCtn);
         setActivatedBusTime(result.activatedBusTime);
         setActivatedBusStopidx(result.activatedBusStopidx);
+        setLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching Data", error);
+        setLoading(false)
       });
   }, []);
+
+  if(loading){
+    return(
+      <h2>Loading...</h2>
+    )
+  }
   return (
     <>
       <Header/>

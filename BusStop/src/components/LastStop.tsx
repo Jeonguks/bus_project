@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { formatTime } from "../utils/FormatTime";
+import { formatTime } from "../utils/formatTime";
 
 const LastStop = () => {
   const [isRunning, setRunning] = useState(false);

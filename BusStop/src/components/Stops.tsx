@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { RiBus2Line } from "react-icons/ri";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { calculateTimeNow } from "../utils/calculateTime";
-import { formatTime } from "../utils/FormatTime";
+import { formatTime } from "../utils/formatTime";
 
 const Stops = (props: {
   stopName: string;
@@ -28,7 +28,7 @@ const Stops = (props: {
         <div className="stops" onClick={onClick}>
           <div className="stops-icon">
             {props.isStop ? (
-              calculateTimeNow(props.stopTime) < 300000 ? (
+              calculateTimeNow(props.stopTime) < 300 ? (
                 <RiBus2Line color="blue" width={"20px"} height={"20px"} />
               ) : (
                 <RiBus2Line color="red" width={"20px"} height={"20px"} />

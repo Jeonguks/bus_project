@@ -1,10 +1,10 @@
-//format miliseconds to m분s초 
+//format seconds  to m분s초 
 
-export const formatTime = (timeMilis: number): string => {
-  const minutes = Math.floor((timeMilis % 3600000) / 60000);
-  const seconds = Math.floor((timeMilis % 60000) / 1000);
+export const formatTime = (inputSeconds: number): string => {
+  const minutes = Math.floor((inputSeconds % 3600) / 60);
+  const seconds = Math.floor((inputSeconds % 60));
   const formattedMinutes = minutes < 1 ? "" : `${minutes}분`;
   const formattedTime = `${formattedMinutes} ${seconds}초`;
 
-  return formattedTime;
+  return formattedTime; //output : m분 s초 
 };

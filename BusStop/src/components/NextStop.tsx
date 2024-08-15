@@ -35,24 +35,27 @@ const NextStop = () => {
     ...activatedBusStopidx.map((idx) => Number(idx))
   );
   const lazyBusTime = Math.min(...activatedBusTime.map((idx) => Number(idx)));
-  console.log(lazyBusTime)
-  console.log("up", upwardIdx);
-  console.log("dw", downwardIdx);
-  console.log("st", stopIdx);
-  console.log(calculateTimeNow(String(lazyBusTime)))
+  // console.log(lazyBusTime);
+  // console.log("up", upwardIdx);
+  // console.log("dw", downwardIdx);
+  // console.log("st", stopIdx);
+  // console.log(calculateTimeNow(String(lazyBusTime)));
 
-  if(lazyBusTime == Infinity||lazyBusTime == -Infinity){
-    return(
-      <div>운행중인 버스가 없거나 운행시간이 아닙니다.</div>
-    )
+  if (lazyBusTime == Infinity || lazyBusTime == -Infinity) {
+    return <div>운행중인 버스가 없거나 운행시간이 아닙니다.</div>;
   }
 
-  if (stopIdx + 1 == downwardIdx || stopIdx + 1 == upwardIdx) {
+  if ((stopIdx + 1 == downwardIdx || stopIdx + 1 == upwardIdx) && (stopIdx!=5)) {
     return <div>도착 또는 출발</div>;
   }
-  if (stopIdx + 1 > downwardIdx && calculateTimeNow(String(lazyBusTime)) > 60) {
+
+  if (
+    stopIdx + 1 > downwardIdx &&
+    calculateTimeNow(String(lazyBusTime)) > 240
+  ) {
     return <div>도착예정 버스가 없습니다.</div>;
   }
+
   if (stopIdx == 0) {
     if (downwardIdx == 15) {
       return <div>하단역에서 회차중</div>;
@@ -68,9 +71,24 @@ const NextStop = () => {
           후 도착예정 ({15 - downwardIdx + stopIdx}번째 전)
         </div>
       );
+    } else {
+      return <div>도착예정 버스가 없습니다.</div>;
     }
   } else if (stopIdx >= 1 && stopIdx <= 6) {
-    if (stopIdx < upwardIdx) {
+    if (downwardIdx >= 8 && downwardIdx <= 15) {
+      return (
+        <div>
+          <strong>
+            {formatTime(
+              calculateRemainTime(1, stopIdx) +
+                calculateRemainTime(downwardIdx, 15)
+            )}
+          </strong>
+          후 도착예정 ({15 - downwardIdx + stopIdx}번째 전)
+        </div>
+      );
+    }
+    if (stopIdx < upwardIdx && !(downwardIdx >= 8 && downwardIdx <= 14)) {
       return <div>도착예정 버스가 없습니다.</div>;
     } else if (downwardIdx >= 8 && downwardIdx <= 15) {
       return (
@@ -79,6 +97,15 @@ const NextStop = () => {
           {stopIdx + 1 - upwardIdx}번째 전)
         </div>
       );
+    } else if (upwardIdx >= 1 && upwardIdx <= 6) {
+      return (
+        <div>
+          {formatTime(calculateRemainTime(upwardIdx, stopIdx + 1))}(
+          {stopIdx + 1 - upwardIdx}번째 전)
+        </div>
+      );
+    } else {
+      return <div>예외발생</div>;
     }
   } else if (stopIdx >= 7 && stopIdx <= 14) {
     if (stopIdx < downwardIdx) {
@@ -91,7 +118,7 @@ const NextStop = () => {
       </div>
     );
   } else {
-    return <div>여기도 하단역</div>;
+    return <div>예외발생2</div>;
   }
 };
 export default NextStop;

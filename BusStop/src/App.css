@@ -157,7 +157,8 @@ header {
   left: inherit;
   width: 2px;
   height: 40px;
-  background-color: rgb(122,192,235)
+  background-color: rgb(122,192,235);
+  z-index: -1;
 }
 .tap-wrapper{
   display: flex;

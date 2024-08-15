@@ -38,7 +38,18 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return (
+      <>
+        <Header />
+        <div className="tap-wrapper">
+          <button onClick={handleModalOpen}>운행정보</button>
+          <button onClick={() => nav("/test")}>회차정보</button>
+        </div>
+        <div className="content-wrapper">
+          <h2>Loading...</h2>
+        </div>
+      </>
+    );
   }
   return (
     <>

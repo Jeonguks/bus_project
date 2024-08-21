@@ -21,13 +21,26 @@ const app = (0, express_1.default)();
 const PORT = 8080;
 const apiRoutes = require("../routes/apiRoutes");
 const stopData_1 = __importDefault(require("../controller/stopData"));
+const fetchAPI_1 = __importDefault(require("../controller/fetchAPI"));
 app.use(express_1.default.json());
 app.use(cors());
-// app.use("api/data",apiRoutes)
-// // app.post("/api/test",(req,res)=>{
-// //     setInterval(addBusData,60000);
-// //     res.json(200)
-// // })
+app.get("/api/bus", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log(req.query);
+        const areaId = req.query.areaId;
+        const activeBusData = yield (0, fetchAPI_1.default)(areaId);
+        if (!activeBusData) {
+            res.status(404).json("Not Found"); // Not Found Error
+        }
+        else {
+            res.json(JSON.stringify(activeBusData));
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.json(500).send("Server Error"); //Internal Server Error
+    }
+}));
 app.get("/getActiveBus", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const activeBusData = yield (0, stopData_1.default)();
@@ -43,19 +56,6 @@ app.get("/getActiveBus", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.json(500).send("Server Error!");
     }
 }));
-// app.get("/test", async (req, res) => {
-//   try {
-//     const data = await fetchData();
-//     if (!data) {
-//       res.json(500);
-//     } else {
-//       res.json(JSON.parse(data));
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.json(500).send("server Error!");
-//   }
-// });
 app.use(express_1.default.static(path_1.default.join(__dirname, "../dist/")));
 app.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../dist/index.html"));

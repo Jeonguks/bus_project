@@ -30,28 +30,29 @@ function fetchAPI(areaId) {
                 return null;
         }
         try {
-            let activatedBusNumber = [];
-            let activatedBusTime = [];
-            let activatedBusWhere = [];
-            let activatedBusStopidx = [];
+            let busCarno = [];
+            let busTime = [];
+            let busWhere = [];
+            let busStopIdx = [];
             const response = yield axios_1.default.get(url + "?serviceKey=" + process.env.BUSAPI_KEY + "&lineid=" + lineid, { responseType: "text" });
             const parsedData = yield (0, xml2js_1.parseStringPromise)(response.data); // parse xml to Object
             const trimedData = parsedData.response.body[0].items[0].item;
             //const jsonData = JSON.stringify(trimedData) // parse Object to JSON
             const stopsWithGpsym = trimedData.filter((stop) => stop.gpsym);
             stopsWithGpsym.forEach((item) => {
-                activatedBusNumber.push(item.carno[0]);
-                activatedBusTime.push(item.gpsym[0]);
-                activatedBusWhere.push(item.bstopnm[0]);
-                activatedBusStopidx.push(item.bstopidx[0]);
+                busCarno.push(item.carno[0]);
+                busTime.push(item.gpsym[0]);
+                busWhere.push(item.bstopnm[0]);
+                busStopIdx.push(item.bstopidx[0]);
             });
             const activeBusDataJson = {
-                activatedBusNumber: activatedBusNumber,
-                activatedBusTime: activatedBusTime,
-                activatedBusWhere: activatedBusWhere,
-                activatedBusStopidx: activatedBusStopidx,
+                busCarno: busCarno,
+                busTime: busTime,
+                busWhere: busWhere,
+                busStopIdx: busStopIdx,
             };
-            console.log(activeBusDataJson);
+            //console.log(response.data);
+            //console.log(activeBusDataJson);
             return activeBusDataJson;
         }
         catch (error) {

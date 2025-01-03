@@ -13,39 +13,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const path_1 = __importDefault(require("path"));
-const mongoose_1 = __importDefault(require("mongoose"));
+//import path from "path";
+//import mongoose from "mongoose";
 require("dotenv/config");
 const cors = require("cors");
 const app = (0, express_1.default)();
 const PORT = 8080;
-const apiRoutes = require("../routes/apiRoutes");
 const stopData_1 = __importDefault(require("../controller/stopData"));
+//import { addBusData } from "../controller/busDataController";
 const fetchAPI_1 = __importDefault(require("../controller/fetchAPI"));
 app.use(express_1.default.json());
 app.use(cors());
 app.get("/api/bus", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(req.query);
         const areaId = req.query.areaId;
+        if (!areaId) {
+            return res.status(400).json({ message: "areaId is invalid" });
+        }
         const activeBusData = yield (0, fetchAPI_1.default)(areaId);
         if (!activeBusData) {
-            res.status(404).json("Not Found"); // Not Found Error
+            return res.status(404).json({ message: "Not Found" }); // Not Found Error
         }
-        else {
-            res.json(JSON.stringify(activeBusData));
-        }
+        res.json(JSON.stringify(activeBusData));
     }
     catch (error) {
         console.error(error);
-        res.json(500).send("Server Error"); //Internal Server Error
+        res.status(500).json({ message: "Internal Server Errorr" }); //Internal Server Error
     }
 }));
 app.get("/getActiveBus", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const activeBusData = yield (0, stopData_1.default)();
         if (!activeBusData) {
-            res.json(500);
+            res.status(500).json({ message: "Internal Server Error" });
         }
         else {
             res.json(JSON.stringify(activeBusData));
@@ -56,21 +56,21 @@ app.get("/getActiveBus", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.json(500).send("Server Error!");
     }
 }));
-app.use(express_1.default.static(path_1.default.join(__dirname, "../dist/")));
-app.get("/", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../dist/index.html"));
-});
-app.get("*", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../dist/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../dist/")));
+// app.get("/", (req: Request, res: Response) => {
+//   res.sendFile(path.join(__dirname, "../dist/index.html"));
+// });
+// app.get("*", (req: Request, res: Response) => {
+//   res.sendFile(path.join(__dirname, "../dist/index.html"));
+// });
 app.listen(PORT, () => {
     console.log(`[server] Server is running at http://localhost:${PORT}`);
 });
-mongoose_1.default
-    .connect(process.env.MONGO_URI)
-    .then(() => {
-    console.log("[server] Connected to MongoDB");
-})
-    .catch((err) => {
-    console.log(`[server] Mongo Error! ${err}`);
-});
+// mongoose
+//   .connect(process.env.MONGO_URI as string)
+//   .then(() => {
+//     console.log("[server] Connected to MongoDB");
+//   })
+//   .catch((err: any) => {
+//     console.log(`[server] Mongo Error! ${err}`);
+//   });

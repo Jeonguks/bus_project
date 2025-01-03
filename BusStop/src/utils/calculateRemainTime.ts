@@ -7,7 +7,6 @@ const calculateRemainTime=(prevStopIdx:number,nextStopIdx:number)=>{
     }
     for(prevStopIdx;prevStopIdx<nextStopIdx;prevStopIdx++){
         sum += dataSet[prevStopIdx].avgym
-        console.log(sum)
     }
     return sum //output: seconds
 }

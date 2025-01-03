@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "api-docs": "swagger-cli bundle ./src/swagger/openapi.yaml --outfile build/swagger.yaml --type yaml",
+    "predev": "npm run api-docs",
     "start": "node src/index.js",
     "dev:server": "nodemon --watch src --exec 'npx' 'ts-node' src/index.ts"
   },
@@ -26,10 +28,13 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.2",
     "typescript": "^5.5.4",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2"
   },
   "engines": {

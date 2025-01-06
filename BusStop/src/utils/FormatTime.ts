@@ -1,4 +1,4 @@
-//format seconds  to m분s초 
+//format seconds  to m분s초 .
 
 export const formatTime = (inputSeconds: number): string => {
   const minutes = Math.floor((inputSeconds % 3600) / 60);
